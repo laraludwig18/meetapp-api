@@ -1,1 +1,1 @@
-web: yarn dev && yarn queue
+web: yarn dev
