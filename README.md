@@ -26,7 +26,7 @@ Criar arquivo **.env** de acordo com o arquivo **.env.example**
 
 Migrar tabelas para postgres:
 ```
-**yarn sequelize db:migrate
+yarn sequelize db:migrate
 ```
 Instalar dependências:
 ```
