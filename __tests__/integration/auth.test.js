@@ -6,7 +6,7 @@ describe('Auth', () => {
   it('should return token not provided', async () => {
     const response = await request(app).get('/schedule');
 
-    expect(response.body.error).toBe('Token não encontrado.');
+    expect(response.body.error).toBe('Token não encontrad.');
   });
 
   it('should return token invalid', async () => {
