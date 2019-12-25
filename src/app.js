@@ -1,4 +1,4 @@
-import './bootstrap';
+import 'dotenv/config';
 
 import Youch from 'youch';
 import * as Sentry from '@sentry/node';

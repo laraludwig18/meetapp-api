@@ -1,7 +1,5 @@
 node_modules/
 .env
-tmp
+tmp/uploads
 dist
-database.sqlite-journal
 __tests__/coverage
-__tests__/database.sqlite

@@ -12,22 +12,21 @@ import {
   SubscriptionController,
 } from './app/controllers';
 
+import { authMiddleware } from './app/middlewares';
+
 import {
-  authMiddleware,
-  validateMeetupCreation,
-  validateMeetupUpdate,
-  validateUserCreation,
+  validateUserStore,
   validateUserUpdate,
-  validateSession,
-} from './app/middlewares';
+  validateSessionStore,
+  validateMeetupStore,
+  validateMeetupUpdate,
+} from './app/validators';
 
 const routes = new Router();
 const upload = multer(multerConfig);
 
-routes.post('/users', validateUserCreation, UserController.store);
-routes.post('/sessions', validateSession, SessionController.store);
-
-routes.get('/', (req, res) => res.send('OK'));
+routes.post('/users', validateUserStore, UserController.store);
+routes.post('/sessions', validateSessionStore, SessionController.store);
 
 routes.use(authMiddleware);
 
@@ -35,7 +34,7 @@ routes.put('/users', validateUserUpdate, UserController.update);
 
 routes.post('/files', upload.single('file'), FileController.store);
 
-routes.post('/meetups', validateMeetupCreation, MeetupController.store);
+routes.post('/meetups', validateMeetupStore, MeetupController.store);
 routes.get('/meetups', MeetupController.index);
 routes.get('/meetups/:meetupId', MeetupController.find);
 routes.put('/meetups/:meetupId', validateMeetupUpdate, MeetupController.update);
