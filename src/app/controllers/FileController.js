@@ -1,12 +1,11 @@
-import { FileService } from '../services';
+import { CreateFileService } from '../services/file';
 
 class FileController {
   async store(req, res) {
     const { originalname: name, filename: path } = req.file;
 
-    const { status, data } = await FileService.create({ name, path });
-
-    return res.status(status).json(data);
+    const file = await CreateFileService.run({ name, path });
+    return res.status(200).json(file);
   }
 }
 

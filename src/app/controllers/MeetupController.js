@@ -1,31 +1,37 @@
-import { MeetupService } from '../services';
+import {
+  GetMeetupsService,
+  FindMeetupByIdService,
+  CreateMeetupService,
+  UpdateMeetupService,
+  RemoveMeetupService,
+} from '../services/meetup';
 
 class MeetupController {
   async index(req, res) {
     const { date, page = 1 } = req.query;
-    const { data, status } = await MeetupService.list({ page, date });
+    const data = await GetMeetupsService.run({ page, date });
 
-    return res.status(status).json(data);
+    return res.status(200).json(data);
   }
 
   async find(req, res) {
     const { meetupId } = req.params;
-    const { data, status } = await MeetupService.find(meetupId);
+    const meetup = await FindMeetupByIdService.run(meetupId);
 
-    return res.status(status).json(data);
+    return res.status(200).json(meetup);
   }
 
   async store(req, res) {
-    const { status, data } = await MeetupService.create({
+    const meetup = await CreateMeetupService.run({
       ...req.body,
       user_id: req.userId,
     });
 
-    return res.status(status).json(data);
+    return res.status(200).json(meetup);
   }
 
   async update(req, res) {
-    const { status, data } = await MeetupService.update(
+    const meetup = await UpdateMeetupService.run(
       {
         ...req.body,
         id: req.params.meetupId,
@@ -33,16 +39,16 @@ class MeetupController {
       req.userId
     );
 
-    return res.status(status).json(data);
+    return res.status(200).json(meetup);
   }
 
   async delete(req, res) {
-    const { status, data } = await MeetupService.remove({
+    const data = await RemoveMeetupService.run({
       id: req.params.meetupId,
       organizerId: req.userId,
     });
 
-    return res.status(status).json(data);
+    return res.status(200).json(data);
   }
 }
 

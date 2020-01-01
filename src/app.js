@@ -41,6 +41,10 @@ class App {
 
   exceptionHandler() {
     this.server.use(async (err, req, res, next) => {
+      if (err.status) {
+        return res.status(err.status).json({ error: err.message });
+      }
+
       if (process.env.NODE_ENV === 'development') {
         const errors = await new Youch(err, req).toJSON();
 
