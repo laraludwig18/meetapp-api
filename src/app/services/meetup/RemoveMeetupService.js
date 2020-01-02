@@ -1,7 +1,7 @@
 import { isBefore } from 'date-fns';
 
 import { Meetup } from '../../models';
-import { PastMeetupError, UnauthorizedError } from '../../errors';
+import { BadRequestError, UnauthorizedError } from '../../errors';
 
 class RemoveMeetupService {
   async run(meetupData) {
@@ -18,7 +18,7 @@ class RemoveMeetupService {
     // Check meetup date
 
     if (isBefore(meetup.date, new Date())) {
-      throw new PastMeetupError(
+      throw new BadRequestError(
         'Não é possivel cancelar eventos que já aconteceram.'
       );
     }

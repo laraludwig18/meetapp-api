@@ -1,4 +1,4 @@
-class PastMeetupError extends Error {
+class BadRequestError extends Error {
   constructor(message) {
     super(message);
 
@@ -7,4 +7,4 @@ class PastMeetupError extends Error {
   }
 }
 
-export default PastMeetupError;
+export default BadRequestError;

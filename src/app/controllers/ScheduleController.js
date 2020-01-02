@@ -1,10 +1,10 @@
-import { ScheduleService } from '../services';
+import { GetScheduleService } from '../services/schedule';
 
 class ScheduleController {
   async index(req, res) {
-    const { status, data } = await ScheduleService.list(req.userId);
+    const meetups = await GetScheduleService.run(req.userId);
 
-    return res.status(status).json(data);
+    return res.status(200).json(meetups);
   }
 }
 

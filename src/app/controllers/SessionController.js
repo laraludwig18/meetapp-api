@@ -1,10 +1,10 @@
-import { SessionService } from '../services';
+import { CreateSessionService } from '../services/session';
 
 class SessionController {
   async store(req, res) {
-    const { status, data } = await SessionService.init(req.body);
+    const data = await CreateSessionService.run(req.body);
 
-    res.status(status).json(data);
+    res.status(200).json(data);
   }
 }
 

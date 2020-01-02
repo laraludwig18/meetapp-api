@@ -1,17 +1,17 @@
-import { UserService } from '../services';
+import { CreateUserService, UpdateUserService } from '../services/user';
 
 class UserController {
   async store(req, res) {
-    const { status, data } = await UserService.create(req.body);
+    const user = await CreateUserService.run(req.body);
 
-    return res.status(status).json(data);
+    return res.status(200).json(user);
   }
 
   async update(req, res) {
     const user = { ...req.body, id: req.userId };
-    const { status, data } = await UserService.update(user);
+    const data = await UpdateUserService.run(user);
 
-    return res.status(status).json(data);
+    return res.status(200).json(data);
   }
 }
 
