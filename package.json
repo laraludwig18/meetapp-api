@@ -6,9 +6,10 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }  
+    }
   },
   "scripts": {
+    "commit": "git-cz",
     "dev": "nodemon src/server.js",
     "queue": "nodemon src/queue.js",
     "build": "sucrase ./src -d ./dist --transforms imports",
@@ -41,6 +42,8 @@
     "@commitlint/config-conventional": "8.3.4",
     "@sucrase/jest-plugin": "2.0.0",
     "@types/jest": "24.0.17",
+    "commitizen": "4.0.3",
+    "cz-conventional-changelog": "3.0.2",
     "eslint": "5.16.0",
     "eslint-config-airbnb-base": "13.1.0",
     "eslint-config-prettier": "6.0.0",
@@ -53,5 +56,10 @@
     "sequelize-cli": "5.5.1",
     "sinon": "8.0.1",
     "sucrase": "3.10.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
