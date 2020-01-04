@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
 
-import { User } from '../../models';
 import authConfig from '../../../config/auth';
 import { UnauthorizedError } from '../../errors';
+import { User } from '../../models';
 
 class CreateSessionService {
   async run(session) {

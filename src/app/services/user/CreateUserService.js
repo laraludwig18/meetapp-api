@@ -1,5 +1,5 @@
-import { User } from '../../models';
 import { ForbiddenError } from '../../errors';
+import { User } from '../../models';
 
 class CreateUserService {
   async run(user) {

@@ -1,7 +1,5 @@
 import { Router } from 'express';
-
 import multer from 'multer';
-import multerConfig from './config/multer';
 
 import {
   FileController,
@@ -11,9 +9,7 @@ import {
   SessionController,
   SubscriptionController,
 } from './app/controllers';
-
 import { authMiddleware } from './app/middlewares';
-
 import {
   validateUserStore,
   validateUserUpdate,
@@ -21,6 +17,7 @@ import {
   validateMeetupStore,
   validateMeetupUpdate,
 } from './app/validators';
+import multerConfig from './config/multer';
 
 const routes = new Router();
 const upload = multer(multerConfig);

@@ -5,7 +5,7 @@ module.exports = {
     node: true,
   },
   extends: ['airbnb-base', 'prettier'],
-  plugins: ['prettier'],
+  plugins: ['prettier', 'eslint-plugin-import-helpers'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -23,6 +23,18 @@ module.exports = {
       'error',
       {
         argsIgnorePattern: 'next',
+      },
+    ],
+    'import-helpers/order-imports': [
+      'warn',
+      {
+        newlinesBetween: 'always',
+        groups: [
+          '/^dotenv/',
+          ['module'],
+          ['parent', 'sibling', 'index'],
+        ],
+        alphabetize: { order: 'asc', ignoreCase: true },
       },
     ],
   },

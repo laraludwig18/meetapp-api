@@ -1,10 +1,9 @@
 import { isBefore } from 'date-fns';
 
-import { Meetup, User, Subscription } from '../../models';
-import { BadRequestError, ForbiddenError, NotFoundError } from '../../errors';
-
-import { Queue } from '../../../lib';
 import { SubscribeEmail } from '../../../jobs';
+import { Queue } from '../../../lib';
+import { BadRequestError, ForbiddenError, NotFoundError } from '../../errors';
+import { Meetup, User, Subscription } from '../../models';
 
 class CreateSubscriptionService {
   async run(subscription) {

@@ -1591,7 +1591,7 @@ create-error-class@^3.0.0:
   dependencies:
     capture-stack-trace "^1.0.0"
 
-cross-env@^6.0.3:
+cross-env@6.0.3:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-6.0.3.tgz#4256b71e49b3a40637a0ce70768a6ef5c72ae941"
   integrity sha512-+KqxF6LCvfhWvADcDPqo64yVIB31gv/jQulX2NGzKS/g3GEVz6/pt4wjHFtFWsHMddebWD/sDthJemzM4MaAag==
@@ -2115,6 +2115,11 @@ eslint-module-utils@^2.4.0:
   dependencies:
     debug "^2.6.9"
     pkg-dir "^2.0.0"
+
+eslint-plugin-import-helpers@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-import-helpers/-/eslint-plugin-import-helpers-1.0.2.tgz#ae0ab47c991c65e1b25b6370f49afa2cab4cbd9c"
+  integrity sha512-aSoqeEEkJou/1NhbSO7Xr2SKSs8mI53qe8uFh9tMl4WCbrOwoel0eA3hRajlJ7MLCG44umf+mY3/dWuufneFzw==
 
 eslint-plugin-import@2.18.0:
   version "2.18.0"
