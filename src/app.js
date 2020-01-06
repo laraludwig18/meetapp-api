@@ -7,6 +7,8 @@ import 'express-async-errors';
 import { resolve } from 'path';
 import Youch from 'youch';
 
+import { ERROR_CODE } from './app/assets/constants';
+import { ERROR_STRINGS } from './app/assets/strings';
 import sentryConfig from './config/sentry';
 import routes from './routes';
 import './database';
@@ -40,7 +42,7 @@ class App {
   exceptionHandler() {
     this.server.use(async (err, req, res, next) => {
       if (err.status) {
-        return res.status(err.status).json({ error: err.message });
+        return res.status(err.status).json(err.messageObject);
       }
 
       if (process.env.NODE_ENV === 'development') {
@@ -49,9 +51,10 @@ class App {
         return res.status(500).json(errors);
       }
 
-      return res
-        .status(500)
-        .json({ error: 'Houve um erro, tente novamente mais tarde!' });
+      return res.status(500).json({
+        code: ERROR_CODE.UNEXPECTED_ERROR,
+        message: ERROR_STRINGS.unexpectedError,
+      });
     });
   }
 }

@@ -1,5 +1,7 @@
 import { string, object, date, number } from 'yup';
 
+import { ERROR_CODE } from '../assets/constants';
+
 export default async (req, res, next) => {
   try {
     const schema = object().shape({
@@ -14,8 +16,13 @@ export default async (req, res, next) => {
 
     return next();
   } catch (err) {
+    const errors = err.inner.map(({ path, message }) => ({
+      field: path,
+      message,
+    }));
+
     return res
       .status(400)
-      .json({ error: 'Falha na validação', messages: err.inner });
+      .json({ code: ERROR_CODE.INVALID_PAYLOAD, message: errors });
   }
 };

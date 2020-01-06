@@ -2,6 +2,8 @@ import { isBefore } from 'date-fns';
 
 import { SubscribeEmail } from '../../../jobs';
 import { Queue } from '../../../lib';
+import { ERROR_CODE } from '../../assets/constants';
+import { ERROR_STRINGS } from '../../assets/strings';
 import { BadRequestError, ForbiddenError, NotFoundError } from '../../errors';
 import { Meetup, User, Subscription } from '../../models';
 
@@ -17,25 +19,28 @@ class CreateSubscriptionService {
     });
 
     if (!meetup) {
-      throw new NotFoundError(
-        'Não foi possivel encontrar o evento selecionado.'
-      );
+      throw new NotFoundError({
+        code: ERROR_CODE.NOT_FOUND,
+        message: ERROR_STRINGS.createSubscription.notFound,
+      });
     }
 
     // Check past meetup
 
     if (isBefore(meetup.date, new Date())) {
-      throw new BadRequestError(
-        'Você não pode se inscrever em eventos que já aconteceram.'
-      );
+      throw new BadRequestError({
+        code: ERROR_CODE.PAST_MEETUP,
+        message: ERROR_STRINGS.createSubscription.pastMeetup,
+      });
     }
 
     // Check if user is the organizer
 
     if (meetup.user_id === subscription.user_id) {
-      throw new ForbiddenError(
-        'Você não pode se inscrever nos seus próprios eventos.'
-      );
+      throw new ForbiddenError({
+        code: ERROR_CODE.OWN_MEETUP,
+        message: ERROR_STRINGS.createSubscription.ownMeetup,
+      });
     }
 
     // Check if user already subscribed
@@ -48,7 +53,10 @@ class CreateSubscriptionService {
     });
 
     if (alreadySubscribed) {
-      throw new BadRequestError('Você já se inscreveu para este evento.');
+      throw new BadRequestError({
+        code: ERROR_CODE.ALREADY_SUBSCRIBED,
+        message: ERROR_STRINGS.createSubscription.alreadySubscribed,
+      });
     }
 
     // Check if user subscribed to another meetup on the same time
@@ -69,9 +77,10 @@ class CreateSubscriptionService {
     });
 
     if (checkTime) {
-      throw new BadRequestError(
-        'Você já se inscreveu para outro evento neste mesmo horário.'
-      );
+      throw new BadRequestError({
+        code: ERROR_CODE.SAME_TIME_MEETUP,
+        message: ERROR_STRINGS.createSubscription.sameTimeMeetup,
+      });
     }
 
     // Send email

@@ -1,7 +1,9 @@
 import { isBefore } from 'date-fns';
 
-import { Meetup } from '../../models';
+import { ERROR_CODE } from '../../assets/constants';
+import { ERROR_STRINGS } from '../../assets/strings';
 import { BadRequestError, UnauthorizedError } from '../../errors';
+import { Meetup } from '../../models';
 
 class RemoveMeetupService {
   async run(meetupData) {
@@ -12,15 +14,19 @@ class RemoveMeetupService {
     // Check if user is the organizer
 
     if (!meetup) {
-      throw new UnauthorizedError('Você não pode cancelar este evento.');
+      throw new UnauthorizedError({
+        code: ERROR_CODE.UNAUTHORIZED,
+        message: ERROR_STRINGS.removeMeetup.unauthorized,
+      });
     }
 
     // Check meetup date
 
     if (isBefore(meetup.date, new Date())) {
-      throw new BadRequestError(
-        'Não é possivel cancelar eventos que já aconteceram.'
-      );
+      throw new BadRequestError({
+        code: ERROR_CODE.PAST_MEETUP,
+        message: ERROR_STRINGS.removeMeetup.pastMeetup,
+      });
     }
 
     await meetup.destroy();

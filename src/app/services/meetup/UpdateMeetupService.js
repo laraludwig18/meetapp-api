@@ -1,7 +1,9 @@
 import { startOfHour, parseISO, isBefore } from 'date-fns';
 
-import { Meetup } from '../../models';
+import { ERROR_CODE } from '../../assets/constants';
+import { ERROR_STRINGS } from '../../assets/strings';
 import { BadRequestError, UnauthorizedError } from '../../errors';
+import { Meetup } from '../../models';
 
 class UpdateMeetupService {
   async run(meetupData, organizerId) {
@@ -12,13 +14,19 @@ class UpdateMeetupService {
     // Check if user is the organizer
 
     if (!meetup) {
-      throw new UnauthorizedError('Você não pode editar este evento.');
+      throw new UnauthorizedError({
+        code: ERROR_CODE.UNAUTHORIZED,
+        message: ERROR_STRINGS.updateMeetup.unauthorized,
+      });
     }
 
     // Check meetup date
 
     if (isBefore(meetup.date, new Date())) {
-      throw new BadRequestError('Eventos passados não podem ser editados.');
+      throw new BadRequestError({
+        code: ERROR_CODE.PAST_MEETUP,
+        message: ERROR_STRINGS.updateMeetup.pastMeetup,
+      });
     }
 
     // Check for past dates
@@ -26,9 +34,10 @@ class UpdateMeetupService {
     const hourStart = startOfHour(parseISO(meetupData.date));
 
     if (hourStart && isBefore(hourStart, new Date())) {
-      throw new BadRequestError(
-        'Não é permitido editar eventos com datas passadas.'
-      );
+      throw new BadRequestError({
+        code: ERROR_CODE.PAST_DATE,
+        message: ERROR_STRINGS.updateMeetup.pastDate,
+      });
     }
 
     const updatedMeetup = await meetup.update(meetupData);

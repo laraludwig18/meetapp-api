@@ -1,7 +1,9 @@
 import { isBefore } from 'date-fns';
 
-import { Meetup, Subscription } from '../../models';
+import { ERROR_CODE } from '../../assets/constants';
+import { ERROR_STRINGS } from '../../assets/strings';
 import { BadRequestError, NotFoundError } from '../../errors';
+import { Meetup, Subscription } from '../../models';
 
 class RemoveSubscriptionService {
   async run(subscription_id) {
@@ -24,15 +26,19 @@ class RemoveSubscriptionService {
     });
 
     if (!subscription) {
-      throw new NotFoundError('Não foi possivel encontrar a inscrição.');
+      throw new NotFoundError({
+        code: ERROR_CODE.NOT_FOUND,
+        message: ERROR_STRINGS.removeSubscription.notFound,
+      });
     }
 
     // Check meetup date
 
     if (isBefore(subscription.meetup.date, new Date())) {
-      throw new BadRequestError(
-        'Não é possivel cancelar inscrição em eventos que já aconteceram.'
-      );
+      throw new BadRequestError({
+        code: ERROR_CODE.PAST_MEETUP,
+        message: ERROR_STRINGS.removeSubscription.pastMeetup,
+      });
     }
 
     await subscription.destroy();

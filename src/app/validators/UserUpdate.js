@@ -1,26 +1,31 @@
 import { string, object, ref } from 'yup';
 
+import { ERROR_CODE } from '../assets/constants';
+import { ERROR_STRINGS } from '../assets/strings';
+
 export default async (req, res, next) => {
   try {
     const schema = object().shape({
       name: string(),
-      email: string().email('Email inválido.'),
+      email: string().email(ERROR_STRINGS.updateUser.payload.invalidEmail),
       oldPassword: string().min(
         6,
-        'Senha atual deve ter, no mínimo, 6 caracteres.'
+        ERROR_STRINGS.updateUser.payload.invalidPassword
       ),
       password: string()
-        .min(6, 'Nova senha deve possuir, no mínimo, 6 caracteres.')
+        .min(6, ERROR_STRINGS.updateUser.payload.invalidNewPassword)
         .when('oldPassword', (oldPassword, field) =>
-          oldPassword ? field.required('Nova senha é obrigatória.') : field
+          oldPassword
+            ? field.required(ERROR_STRINGS.updateUser.payload.newPassword)
+            : field
         ),
       confirmPassword: string().when('password', (password, field) =>
         password
           ? field
-              .required('Confirmação de senha é obrigatória.')
+              .required(ERROR_STRINGS.updateUser.payload.confirmPassword)
               .oneOf(
                 [ref('password')],
-                'Nova senha e sua confirmação não coincidem.'
+                ERROR_STRINGS.updateUser.payload.invalidConfirmPassword
               )
           : field
       ),
@@ -30,8 +35,13 @@ export default async (req, res, next) => {
 
     return next();
   } catch (err) {
+    const errors = err.inner.map(({ path, message }) => ({
+      field: path,
+      message,
+    }));
+
     return res
       .status(400)
-      .json({ error: 'Falha na validação', messages: err.inner });
+      .json({ code: ERROR_CODE.INVALID_PAYLOAD, message: errors });
   }
 };
