@@ -1,16 +1,9 @@
 export const passwordRequired = {
-  error: 'Falha na validação',
-  messages: [
+  code: 'INVALID_PAYLOAD',
+  message: [
     {
-      name: 'ValidationError',
-      path: 'password',
-      type: 'required',
-      errors: ['Senha é obrigatória.'],
-      inner: [],
+      field: 'password',
       message: 'Senha é obrigatória.',
-      params: {
-        path: 'password',
-      },
     },
   ],
 };
