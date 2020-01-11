@@ -7,3 +7,8 @@ export const passwordRequired = {
     },
   ],
 };
+
+export const notFoundUserError = {
+  code: 'INVALID_LOGIN',
+  message: 'O login e/ou a senha digitados estão incorretos.',
+};

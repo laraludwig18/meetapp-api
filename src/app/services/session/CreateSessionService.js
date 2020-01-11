@@ -9,7 +9,7 @@ import { User } from '../../models';
 class CreateSessionService {
   async run(session) {
     const { email, password } = session;
-    const user = await User.fndOne({ where: { email } });
+    const user = await User.findOne({ where: { email } });
 
     if (!user) {
       throw new UnauthorizedError({

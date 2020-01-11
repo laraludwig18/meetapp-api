@@ -1,6 +1,6 @@
 import { validateSessionStore } from '../../../src/app/validators';
-import { passwordRequired } from '../../errorMessages/session';
-import { invalidSession, validSession } from '../../examples/session';
+import { passwordRequired } from '../../assets/errorMessages/session';
+import { invalidSession, validSession } from '../../assets/payloads/session';
 import { resStub, jsonStub, statusStub } from '../../helpers/mocks';
 
 describe('validators / SessionStore', () => {
