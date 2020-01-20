@@ -23,6 +23,7 @@
     "build": "sucrase ./src -d ./dist --transforms imports",
     "start": "node dist/server.js",
     "test": "jest --forceExit",
+    "migrate": "sequelize db:migrate",
     "cover": "jest --collect-coverage --silent --forceExit"
   },
   "dependencies": {

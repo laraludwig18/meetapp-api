@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize';
-import databaseConfig from '../config/database';
+
 import { File, Meetup, User, Subscription } from '../app/models';
+import databaseConfig from '../config/database';
 
 const models = [File, Meetup, User, Subscription];
 

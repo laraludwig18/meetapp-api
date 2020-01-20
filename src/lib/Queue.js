@@ -1,8 +1,7 @@
 import Bee from 'bee-queue';
 
-import { SubscribeEmail } from '../jobs';
-
 import redisConfig from '../config/redis';
+import { SubscribeEmail } from '../jobs';
 
 const jobs = [SubscribeEmail];
 
