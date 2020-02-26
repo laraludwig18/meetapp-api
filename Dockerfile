@@ -8,10 +8,10 @@ COPY package.json yarn.* ./
 
 USER node
 
-COPY --chown=node:node . .
+RUN yarn && yarn build
 
-RUN yarn
+COPY --chown=node:node . .
 
 EXPOSE 3333
 
-CMD ["yarn", "dev"]
+CMD ["yarn", "start"]
