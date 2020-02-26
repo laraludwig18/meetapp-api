@@ -23,7 +23,7 @@
     "build": "sucrase ./src -d ./dist --transforms imports",
     "start": "node dist/server.js",
     "test": "jest --runInBand",
-    "lint": "eslint ./src",
+    "lint": "eslint src",
     "migrate": "sequelize db:migrate",
     "cover": "jest --coverage"
   },
