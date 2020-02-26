@@ -11,9 +11,6 @@ module.exports = {
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   collectCoverageFrom: ['src/app/**/*.js'],
 
-  // The directory where Jest should output its coverage files
-  coverageDirectory: '__tests__/coverage',
-
   // A list of reporter names that Jest uses when writing coverage reports
   coverageReporters: ['text', 'lcov'],
 
