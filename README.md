@@ -1,6 +1,8 @@
-# MeetApp
+<h1 align="center">MeetApp<h1/>
 
 App agregador de eventos para desenvolvedores desenvolvido como projeto final do Bootcamp GoStack 7.0
+  
+[![Coverage Status](https://coveralls.io/repos/github/laraludwig18/meetapp-backend/badge.svg)](https://coveralls.io/github/laraludwig18/meetapp-backend)
 
 ## Inicialização
 
