@@ -5,9 +5,8 @@ App agregador de eventos para desenvolvedores desenvolvido como projeto final do
 <br />  
   
 <div align="center"> 
- 
+  
 [![CI](https://github.com/laraludwig18/meetapp-backend/workflows/ci/badge.svg)](https://github.com/laraludwig18/meetapp-backend/actions?query=workflow%3Aci+branch%3Amaster) 
-
 [![Coverage Status](https://coveralls.io/repos/github/laraludwig18/meetapp-backend/badge.svg)](https://coveralls.io/github/laraludwig18/meetapp-backend)
 
 </div>
