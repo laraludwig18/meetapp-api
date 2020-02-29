@@ -25,7 +25,8 @@
     "test": "jest --runInBand",
     "lint": "eslint src",
     "migrate": "sequelize db:migrate",
-    "cover": "jest --coverage"
+    "cover": "jest --coverage",
+    "postinstall": "yarn build"
   },
   "dependencies": {
     "@sentry/node": "5.5.0",
