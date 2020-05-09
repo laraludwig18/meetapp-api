@@ -13,8 +13,6 @@ App agregador de eventos para desenvolvedores desenvolvido como projeto final do
 
 ## Inicialização
 
-### Backend
-
 Criar banco de dados postgres:
 ```
 docker run --name databaseChallenge -e POSTGRES_PASSWORD=suasenha -p 5432:5432 -d postgres
