@@ -28,9 +28,6 @@ jobs:
       
     - name: Check linting
       run: yarn lint
-      
-    - name: Check commit message
-      uses: wagoid/commitlint-github-action@v1
 
     - name: Coveralls
       uses: coverallsapp/github-action@master
