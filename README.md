@@ -1,6 +1,6 @@
 <h1 align="center">MeetApp</h1>
 
-App agregador de eventos para desenvolvedores desenvolvido como projeto final do Bootcamp GoStack 7.0
+App agregador de eventos para desenvolvedores
   
 <br />  
   
